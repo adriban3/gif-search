@@ -17,7 +17,6 @@ var gifSearch = {
 
     apikey: "W0NHYrDzcv0pFJplSchuDzX9s4R4tnG5",
 
-    //maybe try with random instead of search, only use "tag" search criteria, have to parse response for first ten
     url: "https://api.giphy.com/v1/gifs/random?",
 
     initArr: ["Louis C.K.", "The Office", "Arrested Development", "It's Always Sunny In Philadelphia"],
@@ -44,6 +43,7 @@ var gifSearch = {
 
     //------------function 3-------------------
     //run ajax call with apikey property and newly edited url
+    //display gif
     //call function 5
 
     ajaxCall: function(url) {
@@ -51,9 +51,23 @@ var gifSearch = {
             console.log(i);
             $.ajax(url, "Random").then(function(response) {
                 console.log(response);
-                var gifImg = $("<img>").attr({"src": response.data.images.fixed_height.url});
+                var gifImg = $("<img>").attr({"class": "gifImg", "data-state": "still", "src": response.data.images.fixed_height_still.url, "data-still": response.data.images.fixed_height_still.url, "data-animate": response.data.images.fixed_height.url});
                 $("#gifDiv").prepend(gifImg);
             })
+        }
+    },
+
+    //-------------function 4---------------------
+    //animate or de-animate gifs based on their current data-state attribute (initially set to still)
+
+    animate: function(state) {
+        console.log(state);
+        if (state === "still") {
+            $("img").attr({"data-state": "animate", "src": $("img").attr("data-animate")});
+        }
+
+        else if (state === "animate") {
+            $("img").attr({"data-state": "still", "src": $("img").attr("data-still")});
         }
     },
 
@@ -64,31 +78,20 @@ var gifSearch = {
 
 }
 
-//=---------function 4--------------------
-
-//push users input from text box to tv show array
-//prevent user from entering blanks
-//call function 1
-
-//---------function 5----------------------
-
-//display gifs on screen
-//gifs should be displayed static until click (click event below)
-//make sure to prepend as gifs should not be replaced?
-//also display ratings under each gif
-
-//----------------Click events (defined outside of functions)--------------------
-
-//on GIF TOPIC button click, function 2
-
-//on SEARCH button click, function 4
-
-//on gif click, animate/staticate(?) gifs (essentially change state from active to inactive or inactive to active)
-
 //----------------on startup----------------------
 
 //run function 1
 
 gifSearch.buttonCreate(gifSearch.initArr);
 
+//----------------Click events (defined outside of functions)--------------------
+
+//on GIF TOPIC button click, function 2
+
 $(".gifButton").on("click", function() {gifSearch.createURL(gifSearch.apikey, gifSearch.url, $(this).attr("id"))});
+
+//on SEARCH button click, function 4
+
+//on gif click, animate/staticate(?) gifs (essentially change state from active to inactive or inactive to active)
+
+$(document).on("click", ".gifImg", function() {gifSearch.animate($(this).attr("data-state"))});
