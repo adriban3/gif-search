@@ -17,7 +17,8 @@ var gifSearch = {
 
     apikey: "W0NHYrDzcv0pFJplSchuDzX9s4R4tnG5",
 
-    url: "https://api.giphy.com/v1/gifs/search?",
+    //maybe try with random instead of search, only use "tag" search criteria, have to parse response for first ten
+    url: "https://api.giphy.com/v1/gifs/random?",
 
     initArr: ["Louis C.K.", "The Office", "Arrested Development", "It's Always Sunny In Philadelphia"],
 
@@ -26,7 +27,8 @@ var gifSearch = {
 
     buttonCreate: function(initArr) {
         initArr.forEach(function(item) {
-            $("#initButtons").append("<button id='" + item + "'class='gifButton'>" + item + "</button>");
+            var buttons = $("<button>").attr({"id": item, "class": "gifButton"}).text(item);
+            $("#initButtons").append(buttons);
         })
     },
 
@@ -35,32 +37,37 @@ var gifSearch = {
     //call function 3
 
     createURL: function(apikey, url, buttonID) {
-        url += $.param({"api_key": apikey, "q": buttonID, "limit": "10"})
-        // url = decodeURI(url);
+        url += $.param({"api_key": apikey, "tag": buttonID})
         console.log(url);
-        //add function three call here
-    }
+        this.ajaxCall(url);
+    },
 
+    //------------function 3-------------------
+    //run ajax call with apikey property and newly edited url
+    //call function 5
+
+    ajaxCall: function(url) {
+        for (var i = 1; i <= 10; i++) {
+            console.log(i);
+            $.ajax(url, "Random").then(function(response) {
+                console.log(response);
+                var gifImg = $("<img>").attr({"src": response.data.images.fixed_height.url});
+                $("#gifDiv").prepend(gifImg);
+            })
+        }
+    },
+
+    //----------function 4--------------------
+    //push users input from text box to tv show array
+    //prevent user from entering blanks
+    //call function 1
 
 }
-
-
-
-
-
-
-
-
-
-//------------function 3-------------------
-
-//run ajax call with apikey property and newly edited url
-//call function 5
 
 //=---------function 4--------------------
 
 //push users input from text box to tv show array
-
+//prevent user from entering blanks
 //call function 1
 
 //---------function 5----------------------
