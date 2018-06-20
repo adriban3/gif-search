@@ -9,34 +9,48 @@
 
 var gifSearch = {
 
+    //api key property
+
+    //url property
+
+    //TV show array property
+
     apikey: "W0NHYrDzcv0pFJplSchuDzX9s4R4tnG5",
 
     url: "https://api.giphy.com/v1/gifs/search?",
 
     initArr: ["Louis C.K.", "The Office", "Arrested Development", "It's Always Sunny In Philadelphia"],
 
+    //-------------function 1------------------
+    //for loop to add array elements to screen (for each element in array, append new button with array text to div)
+
     buttonCreate: function(initArr) {
-        initArr.forEach(function(item, index) {
-            $("#initButtons").append("<button id=" + initArr[index] + ">" + initArr[index] + "</button>");
+        initArr.forEach(function(item) {
+            $("#initButtons").append("<button id='" + item + "'class='gifButton'>" + item + "</button>");
         })
+    },
+
+    //----------function 2---------------------
+    //create url based on search criteria
+    //call function 3
+
+    createURL: function(apikey, url, buttonID) {
+        url += $.param({"api_key": apikey, "q": buttonID, "limit": "10"})
+        // url = decodeURI(url);
+        console.log(url);
+        //add function three call here
     }
+
+
 }
 
-//api key property
 
-//url property
 
-//TV show array property
 
-//-------------function 1------------------
 
-//for loop to add array elements to screen (for each element in array, append new button with array text to div)
 
-//----------function 2---------------------
 
-//create url based on search criteria
 
-//call function 3
 
 //------------function 3-------------------
 
@@ -69,3 +83,5 @@ var gifSearch = {
 //run function 1
 
 gifSearch.buttonCreate(gifSearch.initArr);
+
+$(".gifButton").on("click", function() {gifSearch.createURL(gifSearch.apikey, gifSearch.url, $(this).attr("id"))});
