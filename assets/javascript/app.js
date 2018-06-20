@@ -7,6 +7,21 @@
 
 //set up app as object
 
+var gifSearch = {
+
+    apikey: "W0NHYrDzcv0pFJplSchuDzX9s4R4tnG5",
+
+    url: "https://api.giphy.com/v1/gifs/search?",
+
+    initArr: ["Louis C.K.", "The Office", "Arrested Development", "It's Always Sunny In Philadelphia"],
+
+    buttonCreate: function(initArr) {
+        initArr.forEach(function(item, index) {
+            $("#initButtons").append("<button id=" + initArr[index] + ">" + initArr[index] + "</button>");
+        })
+    }
+}
+
 //api key property
 
 //url property
@@ -52,3 +67,5 @@
 //----------------on startup----------------------
 
 //run function 1
+
+gifSearch.buttonCreate(gifSearch.initArr);
