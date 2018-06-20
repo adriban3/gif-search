@@ -26,7 +26,7 @@ var gifSearch = {
 
     buttonCreate: function(initArr) {
         initArr.forEach(function(item) {
-            var buttons = $("<button>").attr({"id": item, "class": "gifButton"}).text(item);
+            var buttons = $("<button>").attr({"id": item, "class": "gifButton btn btn-primary"}).text(item);
             $("#initButtons").append(buttons);
         })
     },
