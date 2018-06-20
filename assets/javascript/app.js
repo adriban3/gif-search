@@ -25,6 +25,7 @@ var gifSearch = {
     //for loop to add array elements to screen (for each element in array, append new button with array text to div)
 
     buttonCreate: function(initArr) {
+        $("#initButtons").empty();
         initArr.forEach(function(item) {
             var buttons = $("<button>").attr({"id": item, "class": "gifButton btn btn-primary"}).text(item);
             $("#initButtons").append(buttons);
@@ -76,6 +77,12 @@ var gifSearch = {
     //prevent user from entering blanks
     //call function 1
 
+    newButton: function(inputText) {
+        console.log(inputText);
+        initArr.push(inputText);
+        buttonCreate(initArr);
+    },
+
 }
 
 //----------------on startup----------------------
@@ -91,6 +98,8 @@ gifSearch.buttonCreate(gifSearch.initArr);
 $(".gifButton").on("click", function() {gifSearch.createURL(gifSearch.apikey, gifSearch.url, $(this).attr("id"))});
 
 //on SEARCH button click, function 4
+
+$("#submit").on("click", function() {gifSearch.newButton($("#Gif-Search box").value)})
 
 //on gif click, animate/staticate(?) gifs (essentially change state from active to inactive or inactive to active)
 
