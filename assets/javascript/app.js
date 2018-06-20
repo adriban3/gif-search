@@ -77,10 +77,11 @@ var gifSearch = {
     //prevent user from entering blanks
     //call function 1
 
-    newButton: function(inputText) {
+    newButton: function(inputText, initArr, event) {
+        event.preventDefault();
         console.log(inputText);
         initArr.push(inputText);
-        buttonCreate(initArr);
+        gifSearch.buttonCreate(initArr);
     },
 
 }
@@ -99,7 +100,7 @@ $(".gifButton").on("click", function() {gifSearch.createURL(gifSearch.apikey, gi
 
 //on SEARCH button click, function 4
 
-$("#submit").on("click", function() {gifSearch.newButton($("#Gif-Search box").value)})
+$("#submit").on("click", function(e) {gifSearch.newButton($("#gfs").value, gifSearch.initArr, e)})
 
 //on gif click, animate/staticate(?) gifs (essentially change state from active to inactive or inactive to active)
 
