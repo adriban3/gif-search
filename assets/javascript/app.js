@@ -60,14 +60,14 @@ var gifSearch = {
     //-------------function 4---------------------
     //animate or de-animate gifs based on their current data-state attribute (initially set to still)
 
-    animate: function(state) {
+    animate: function(state, specImg) {
         console.log(state);
         if (state === "still") {
-            $("img").attr({"data-state": "animate", "src": $("img").attr("data-animate")});
+            $(specImg).attr({"data-state": "animate", "src": $(specImg).attr("data-animate")});
         }
 
         else if (state === "animate") {
-            $("img").attr({"data-state": "still", "src": $("img").attr("data-still")});
+            $(specImg).attr({"data-state": "still", "src": $(specImg).attr("data-still")});
         }
     },
 
@@ -94,4 +94,4 @@ $(".gifButton").on("click", function() {gifSearch.createURL(gifSearch.apikey, gi
 
 //on gif click, animate/staticate(?) gifs (essentially change state from active to inactive or inactive to active)
 
-$(document).on("click", ".gifImg", function() {gifSearch.animate($(this).attr("data-state"))});
+$(document).on("click", ".gifImg", function() {gifSearch.animate($(this).attr("data-state"), $(this))});
