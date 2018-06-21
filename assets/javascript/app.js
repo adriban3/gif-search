@@ -38,7 +38,6 @@ var gifSearch = {
 
     createURL: function(apikey, url, buttonID) {
         url += $.param({"api_key": apikey, "tag": buttonID})
-        console.log(url);
         this.ajaxCall(url);
     },
 
@@ -49,9 +48,7 @@ var gifSearch = {
 
     ajaxCall: function(url) {
         for (var i = 1; i <= 10; i++) {
-            console.log(i);
             $.ajax(url, "Random").then(function(response) {
-                console.log(response);
                 var gifImg = $("<img>").attr({"class": "gifImg", "data-state": "still", "src": response.data.images.fixed_height_still.url, "data-still": response.data.images.fixed_height_still.url, "data-animate": response.data.images.fixed_height.url});
                 $("#gifDiv").prepend(gifImg);
             })
@@ -62,7 +59,6 @@ var gifSearch = {
     //animate or de-animate gifs based on their current data-state attribute (initially set to still)
 
     animate: function(state, specImg) {
-        console.log(state);
         if (state === "still") {
             $(specImg).attr({"data-state": "animate", "src": $(specImg).attr("data-animate")});
         }
@@ -79,9 +75,10 @@ var gifSearch = {
 
     newButton: function(inputText, initArr, event) {
         event.preventDefault();
-        console.log(inputText);
-        initArr.push(inputText);
-        gifSearch.buttonCreate(initArr);
+        if (inputText) {
+            initArr.push(inputText);
+            gifSearch.buttonCreate(initArr);
+        }
     },
 
 }
