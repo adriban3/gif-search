@@ -14,6 +14,7 @@ body {
 
 .jumbotron {
     background-color: rgba(0,0,0,.5);
+    overflow: auto;
 }
 
 .form-group {
@@ -37,6 +38,13 @@ body {
 }
 
 #submit {
+    font-family: monospace;
+    color: #7cfc00;
+    background-color: black;
+    border-color: black;
+}
+
+.colbtn {
     font-family: monospace;
     color: #7cfc00;
     background-color: black;

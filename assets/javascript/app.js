@@ -82,6 +82,10 @@ var gifSearch = {
         }
     },
 
+    collapse: function(event) {
+        event.preventDefault();
+    },
+
 }
 
 //----------------on startup----------------------
@@ -103,3 +107,7 @@ $(document).on("click", ".gifButton", function() {gifSearch.createURL(gifSearch.
 //on gif click, animate/staticate(?) gifs (essentially change state from active to inactive or inactive to active)
 
 $(document).on("click", ".gifImg", function() {gifSearch.animate($(this).attr("data-state"), $(this))});
+
+//on collapse button click, stop page from refreshing
+
+$(document).on("click", ".colbtn", function(e) {gifSearch.collapse(e)})
