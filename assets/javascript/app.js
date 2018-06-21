@@ -94,13 +94,13 @@ gifSearch.buttonCreate(gifSearch.initArr);
 
 //----------------Click events (defined outside of functions)--------------------
 
-//on GIF TOPIC button click, function 2
-
-$(".gifButton").on("click", function() {gifSearch.createURL(gifSearch.apikey, gifSearch.url, $(this).attr("id"))});
-
 //on SEARCH button click, function 4
 
-$("#submit").on("click", function(e) {gifSearch.newButton($("#gfs").value, gifSearch.initArr, e)})
+$("#submit").on("click", function(e) {gifSearch.newButton($("#gfs").val(), gifSearch.initArr, e)})
+
+//on GIF TOPIC button click, function 2
+
+$(document).on("click", ".gifButton", function() {gifSearch.createURL(gifSearch.apikey, gifSearch.url, $(this).attr("id"))});
 
 //on gif click, animate/staticate(?) gifs (essentially change state from active to inactive or inactive to active)
 
