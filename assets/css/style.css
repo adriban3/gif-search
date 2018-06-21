@@ -1,0 +1,51 @@
+body {
+    background-image: url(../images/frame.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.center {
+    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.jumbotron {
+    background-color: rgba(0,0,0,.5);
+    overflow: auto;
+}
+
+.form-group {
+    font-family: monospace;
+    font-size: 2rem;
+    color:#7cfc00;
+}
+
+.green {
+    font-family: monospace;
+    color:#7cfc00;
+}
+
+.gifButton {
+    font-family: monospace;
+    color: #7cfc00;
+    background-color: black;
+    border-color: black;
+    margin-right: .25%;
+    margin-bottom: .25%;
+}
+
+#submit {
+    font-family: monospace;
+    color: #7cfc00;
+    background-color: black;
+    border-color: black;
+}
+
+#gfs {
+    background-color: black;
+    color: #7cfc00;
+    border-color: black;
+}
