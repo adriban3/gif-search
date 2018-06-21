@@ -49,6 +49,7 @@ var gifSearch = {
     ajaxCall: function(url) {
         for (var i = 1; i <= 10; i++) {
             $.ajax(url, "Random").then(function(response) {
+                console.log(response);
                 var gifImg = $("<img>").attr({"class": "gifImg", "data-state": "still", "src": response.data.images.fixed_height_still.url, "data-still": response.data.images.fixed_height_still.url, "data-animate": response.data.images.fixed_height.url});
                 $("#gifDiv").prepend(gifImg);
             })
@@ -68,7 +69,7 @@ var gifSearch = {
         }
     },
 
-    //----------function 4--------------------
+    //----------function 5--------------------
     //push users input from text box to tv show array
     //prevent user from entering blanks
     //call function 1
