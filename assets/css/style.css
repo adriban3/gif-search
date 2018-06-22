@@ -22,8 +22,43 @@ body {
 
 @media only screen and (max-width: 1803px) {
     .jumbotron {
+        margin-left: 11%;
+        margin-right: 35%;
+    }
+}
+
+@media only screen and (max-width: 1735px) {
+    .jumbotron {
+        margin-left: 13%;
+        margin-right: 35%;
+    }
+}
+
+@media only screen and (max-width: 1616px) {
+    .jumbotron {
         margin-left: 15%;
         margin-right: 35%;
+    }
+}
+
+@media only screen and (max-width: 1494px) {
+    .jumbotron {
+        margin-left: 17%;
+        margin-right: 37%;
+    }
+}
+
+@media only screen and (max-width: 1417px) {
+    .jumbotron {
+        margin-left: 19%;
+        margin-right: 39%;
+    }
+}
+
+@media only screen and (max-width: 1396px) {
+    .jumbotron {
+        margin-left: 21%; /*height breakpoint at 1200px*/
+        margin-right: 39%;
     }
 }
 
