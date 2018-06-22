@@ -20,6 +20,13 @@ body {
     margin-right: 33%; /*media query this*/
 }
 
+@media only screen and (max-width: 1803px) {
+    .jumbotron {
+        margin-left: 15%;
+        margin-right: 35%;
+    }
+}
+
 .form-group {
     font-family: monospace;
     font-size: 2rem;
