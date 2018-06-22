@@ -1,5 +1,5 @@
 body {
-    background-image: url(../images/frame.jpg);
+    background-image: url(../images/frame.jpg); /*might have to change image depending on screen size (media query)*/
     background-size: cover;
     background-position: center;
 }
