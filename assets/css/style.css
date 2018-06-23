@@ -14,7 +14,7 @@ body {
 
 .jumbotron {
     background-color: rgba(0,0,0,.5);
-    max-height: 600px; /*media query this*/
+    max-height: 500px; /*media query this*/
     overflow: auto;
     margin-left: 8%; /*media query this*/
     margin-right: 33%; /*media query this*/
@@ -59,6 +59,19 @@ body {
     .jumbotron {
         margin-left: 21%; /*height breakpoint at 1200px*/
         margin-right: 39%;
+    }
+}
+
+@media only screen and (max-width: 928px) {
+    .jumbotron {
+        margin: 0;
+        max-height: 100%;
+        max-width: 100%;
+    }
+
+    body {
+        background-image: none;
+        background-color: white;
     }
 }
 
