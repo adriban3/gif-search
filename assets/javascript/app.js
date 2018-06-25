@@ -50,8 +50,13 @@ var gifSearch = {
         for (var i = 1; i <= 10; i++) {
             $.ajax(url, "Random").then(function(response) {
                 console.log(response);
+                var gifImgCont = $("<div>").attr({"class": "gifImgCont"});
                 var gifImg = $("<img>").attr({"class": "gifImg", "data-state": "still", "src": response.data.images.fixed_height_still.url, "data-still": response.data.images.fixed_height_still.url, "data-animate": response.data.images.fixed_height.url});
-                $("#gifDiv").prepend(gifImg);
+                var dbtn = $("<button>Download</button>").attr({"class": "dnld gifButton"});
+                var fbtn = $("<button>Favorite</button>").attr({"class": "fvrt gifButton"})
+                $(gifImgCont).append(gifImg, dbtn, fbtn);
+                $("#gifDiv").prepend(gifImgCont);
+                // $("#gifDiv").prepend(gifImg);
             })
         }
     },

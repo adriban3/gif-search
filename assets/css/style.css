@@ -62,7 +62,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 928px) {
+@media only screen and (max-width: 991px) {
     .jumbotron {
         margin: 0;
         max-height: 100%;
@@ -99,6 +99,7 @@ body {
     border-color: black;
     margin-right: .25%;
     margin-bottom: .25%;
+    cursor: pointer;
 }
 
 #submit {
@@ -106,6 +107,7 @@ body {
     color: #7cfc00;
     background-color: black;
     border-color: black;
+    cursor: pointer;
 }
 
 .colbtn {
@@ -113,6 +115,7 @@ body {
     color: #7cfc00;
     background-color: black;
     border-color: black;
+    cursor: pointer;
 }
 
 #gfs {
@@ -120,3 +123,30 @@ body {
     color: #7cfc00;
     border-color: black;
 }
+
+.gifImg {
+    cursor: pointer;
+}
+
+.gifImgCont {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.dnld {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    height: auto;
+    cursor: pointer;
+}
+
+.fvrt {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    height: auto;
+    cursor: pointer;
+}
+
