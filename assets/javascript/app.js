@@ -53,8 +53,10 @@ var gifSearch = {
                 var gifImgCont = $("<div>").attr({"class": "gifImgCont"});
                 var gifImg = $("<img>").attr({"class": "gifImg", "data-state": "still", "src": response.data.images.fixed_height_still.url, "data-still": response.data.images.fixed_height_still.url, "data-animate": response.data.images.fixed_height.url});
                 var dbtn = $("<button>Download</button>").attr({"class": "dnld gifButton"});
+                var dl = $("<a>").attr({"href": response.data.source, "download": "image.gif"}); //download attribute not working, also not sure what link to use
+                $(dl).append(dbtn);
                 var fbtn = $("<button>Favorite</button>").attr({"class": "fvrt gifButton"})
-                $(gifImgCont).append(gifImg, dbtn, fbtn);
+                $(gifImgCont).append(gifImg, dl, fbtn);
                 $("#gifDiv").prepend(gifImgCont);
                 // $("#gifDiv").prepend(gifImg);
             })
@@ -91,6 +93,11 @@ var gifSearch = {
         event.preventDefault();
     },
 
+    // //function that adds gif to hidden favorites section on button click, should store favorites to session or local storage
+    // favoriteGif: function(fvrtGif) {
+
+    // },
+
 }
 
 //----------------on startup----------------------
@@ -102,17 +109,16 @@ gifSearch.buttonCreate(gifSearch.initArr);
 //----------------Click events (defined outside of functions)--------------------
 
 //on SEARCH button click, function 4
-
 $("#submit").on("click", function(e) {gifSearch.newButton($("#gfs").val(), gifSearch.initArr, e)})
 
 //on GIF TOPIC button click, function 2
-
 $(document).on("click", ".gifButton", function() {gifSearch.createURL(gifSearch.apikey, gifSearch.url, $(this).attr("id"))});
 
 //on gif click, animate/staticate(?) gifs (essentially change state from active to inactive or inactive to active)
-
 $(document).on("click", ".gifImg", function() {gifSearch.animate($(this).attr("data-state"), $(this))});
 
 //on collapse button click, stop page from refreshing
+$(document).on("click", ".colbtn", function(e) {gifSearch.collapse(e)});
 
-$(document).on("click", ".colbtn", function(e) {gifSearch.collapse(e)})
+// //on favorite button click, run favorite gif function
+// $(document).on("click", "fvrt", function() {gifSearch.favoriteGif($(this))});
