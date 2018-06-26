@@ -53,9 +53,9 @@ var gifSearch = {
                 var gifImgCont = $("<div>").attr({"class": "gifImgCont"});
                 var gifImg = $("<img>").attr({"class": "gifImg", "data-state": "still", "src": response.data.images.fixed_height_still.url, "data-still": response.data.images.fixed_height_still.url, "data-animate": response.data.images.fixed_height.url});
                 var dbtn = $("<button>Download</button>").attr({"class": "dnld"});
-                var dl = $("<a>").attr({"href": response.data.source, "download": "image.gif"}); //download attribute not working, also not sure what link to use
+                // var dl = $("<a>").attr({"href": response.data.url, "download": "image.gif"}); //download attribute not working, also not sure what link to use
                 // $(dl).click();
-                $(dbtn).append(dl);
+                // $(dl).append(dbtn);
                 var fbtn = $("<button>Favorite</button>").attr({"class": "fvrt"})
                 $(gifImgCont).append(gifImg, dbtn, fbtn);
                 $("#gifDiv").prepend(gifImgCont);
@@ -90,6 +90,7 @@ var gifSearch = {
         }
     },
 
+    //function that toggles hidden divs when other hidden div is open
     collapse: function(whichbtn, event) {
         event.preventDefault();
 
@@ -106,15 +107,24 @@ var gifSearch = {
         }
     },
 
-    // //function that adds gif to hidden favorites section on button click, should store favorites to session or local storage
+    //function that adds gif to hidden favorites section on button click, should store favorites to session or local storage
     favoriteGif: function(fvrtGifbtn, event) {
         event.preventDefault();
-        toClone = $(fvrtGifbtn).parent().children(".gifImg");
-        clone = $(toClone).clone();
+        var toClone = $(fvrtGifbtn).parent().children(".gifImg");
+        var clone = $(toClone).clone();
         $("#favDiv").append($(clone));
         $(fvrtGifbtn).remove();
     },
 
+    //function that downloads gif on button click
+    downloadGif: function(dnldGifbtn, event) {
+        event.preventDefault();
+        var todnld = $(dnldGifbtn).parent().children(".gifImg");
+        var dlLink = $("<a>");
+        $(dlLink).attr({"download": $(todnld).attr("data-animate"), "href": $(todnld).attr("data-animate")});
+        $(dlLink).append("body");
+        $(dlLink)[0].click(); //https://stackoverflow.com/questions/17311645/download-image-with-javascript
+    }
 }
 
 //----------------on startup----------------------
@@ -137,5 +147,8 @@ $(document).on("click", ".gifImg", function() {gifSearch.animate($(this).attr("d
 //on collapse button click, stop page from refreshing
 $(document).on("click", ".colbtn", function(e) {gifSearch.collapse($(this),e)});
 
-// //on favorite button click, run favorite gif function
+//on favorite button click, run favorite gif function
 $(document).on("click", ".fvrt", function(e) {gifSearch.favoriteGif($(this), e)});
+
+//on download button click, run download gif function
+$(document).on("click", ".dnld", function(e) {gifSearch.downloadGif($(this), e)})
