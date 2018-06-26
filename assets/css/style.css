@@ -143,9 +143,15 @@ body {
 }
 
 .fvrt {
+    font-family: monospace;
+    color: #7cfc00;
+    background-color: black;
+    border-color: black;
+    margin-right: .25%;
+    margin-bottom: .25%;
     position: absolute;
     bottom: 5%;
-    right: 5%;
+    right: 40%;
     height: auto;
     cursor: pointer;
 }

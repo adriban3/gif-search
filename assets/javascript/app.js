@@ -52,11 +52,12 @@ var gifSearch = {
                 console.log(response);
                 var gifImgCont = $("<div>").attr({"class": "gifImgCont"});
                 var gifImg = $("<img>").attr({"class": "gifImg", "data-state": "still", "src": response.data.images.fixed_height_still.url, "data-still": response.data.images.fixed_height_still.url, "data-animate": response.data.images.fixed_height.url});
-                var dbtn = $("<button>Download</button>").attr({"class": "dnld gifButton"});
-                var dl = $("<a>").attr({"href": response.data.source, "download": "image.gif"}); //download attribute not working, also not sure what link to use
-                $(dl).append(dbtn);
-                var fbtn = $("<button>Favorite</button>").attr({"class": "fvrt gifButton"})
-                $(gifImgCont).append(gifImg, dl, fbtn);
+                // var dbtn = $("<button>Download</button>").attr({"class": "dnld gifButton"});
+                // var dl = $("<a>").attr({"href": response.data.source, "download": "image.gif"}); //download attribute not working, also not sure what link to use
+                // $(dl).click();
+                // $(dl).append(dbtn);
+                var fbtn = $("<button>Favorite</button>").attr({"class": "fvrt"})
+                $(gifImgCont).append(gifImg, fbtn);
                 $("#gifDiv").prepend(gifImgCont);
                 // $("#gifDiv").prepend(gifImg);
             })
@@ -94,9 +95,13 @@ var gifSearch = {
     },
 
     // //function that adds gif to hidden favorites section on button click, should store favorites to session or local storage
-    // favoriteGif: function(fvrtGif) {
-
-    // },
+    favoriteGif: function(fvrtGifbtn, event) {
+        event.preventDefault();
+        toClone = $(fvrtGifbtn).parent().children(".gifImg");
+        clone = $(toClone).clone();
+        $("#favDiv").append($(clone));
+        $(fvrtGifbtn).remove();
+    },
 
 }
 
@@ -121,4 +126,4 @@ $(document).on("click", ".gifImg", function() {gifSearch.animate($(this).attr("d
 $(document).on("click", ".colbtn", function(e) {gifSearch.collapse(e)});
 
 // //on favorite button click, run favorite gif function
-// $(document).on("click", "fvrt", function() {gifSearch.favoriteGif($(this))});
+$(document).on("click", ".fvrt", function(e) {gifSearch.favoriteGif($(this), e)});
