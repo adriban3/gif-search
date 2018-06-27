@@ -138,7 +138,7 @@ var gifSearch = {
     //function that adds gif to hidden favorites section on button click, should store favorites to session or local storage
     favoriteGif: function(fvrtGifbtn, event) {
         event.preventDefault();
-        var toClone = $(fvrtGifbtn).parent().remove(".dnld", ".fvrt");
+        var toClone = $(fvrtGifbtn).parent();
         // var imgCanvas = document.createElement("canvas");
         // var imgContext = imgCanvas.getContext("2d");
         // imgCanvas.width = toClone.width;
@@ -147,6 +147,8 @@ var gifSearch = {
         // var imgAsDataURL = imgCanvas.toDataURL("image/png");
         // localStorage.setItem("image", imgAsDataURL);
         var clone = $(toClone).clone();
+        $(clone).find(".dnld").remove();
+        $(clone).find(".fvrt").remove();
         // localStorage.setItem("image", clone); //right here
         $("#favDiv").append(clone);
         $(fvrtGifbtn).remove();
