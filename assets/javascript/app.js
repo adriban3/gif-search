@@ -111,8 +111,16 @@ var gifSearch = {
     favoriteGif: function(fvrtGifbtn, event) {
         event.preventDefault();
         var toClone = $(fvrtGifbtn).parent().children(".gifImg");
+        // var imgCanvas = document.createElement("canvas");
+        // var imgContext = imgCanvas.getContext("2d");
+        // imgCanvas.width = toClone.width;
+        // imgCanvas.height = toClone.height;
+        // imgContext.drawImage(toClone, 0, 0, toClone.width, toClone.height);
+        // var imgAsDataURL = imgCanvas.toDataURL("image/png");
+        // localStorage.setItem("image", imgAsDataURL);
         var clone = $(toClone).clone();
-        $("#favDiv").append($(clone));
+        // localStorage.setItem("image", clone); //right here
+        $("#favDiv").append(clone);
         $(fvrtGifbtn).remove();
     },
 
@@ -121,7 +129,7 @@ var gifSearch = {
         event.preventDefault();
         var todnld = $(dnldGifbtn).parent().children(".gifImg");
         var dlLink = $("<a>");
-        $(dlLink).attr({"download": $(todnld).attr("data-animate"), "href": $(todnld).attr("data-animate")});
+        $(dlLink).attr({"download": $(todnld).attr("data-animate"), "href": $(todnld).attr("data-animate"), "target": "_blank"});
         $(dlLink).append("body");
         $(dlLink)[0].click(); //https://stackoverflow.com/questions/17311645/download-image-with-javascript
     }
