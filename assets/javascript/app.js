@@ -17,7 +17,9 @@ var gifSearch = {
 
     apikey: "W0NHYrDzcv0pFJplSchuDzX9s4R4tnG5",
 
-    url: "https://api.giphy.com/v1/gifs/random?",
+    // url: "https://api.giphy.com/v1/gifs/random?",
+
+    url: "https://api.giphy.com/v1/gifs/search?",
 
     initArr: ["Louis C.K.", "The Office", "Arrested Development", "It's Always Sunny In Philadelphia"],
 
@@ -36,8 +38,13 @@ var gifSearch = {
     //create url based on search criteria
     //call function 3
 
+    // createURL: function(apikey, url, buttonID) {
+    //     url += $.param({"api_key": apikey, "tag": buttonID})
+    //     this.ajaxCall(url);
+    // },
+
     createURL: function(apikey, url, buttonID) {
-        url += $.param({"api_key": apikey, "tag": buttonID})
+        url += $.param({"api_key": apikey, "q": buttonID, "limit": "10"})
         this.ajaxCall(url);
     },
 
@@ -46,22 +53,41 @@ var gifSearch = {
     //display gif
     //call function 5
 
+    // ajaxCall: function(url) {
+    //     for (var i = 1; i <= 10; i++) {
+    //         $.ajax(url, "Random").then(function(response) {
+    //             console.log(response);
+    //             var gifImgCont = $("<div>").attr({"class": "gifImgCont"});
+    //             var gifImg = $("<img>").attr({"class": "gifImg", "data-state": "still", "src": response.data.images.fixed_height_still.url, "data-still": response.data.images.fixed_height_still.url, "data-animate": response.data.images.fixed_height.url});
+    //             var dbtn = $("<button>Download</button>").attr({"class": "dnld"});
+    //             // var dl = $("<a>").attr({"href": response.data.url, "download": "image.gif"}); //download attribute not working, also not sure what link to use
+    //             // $(dl).click();
+    //             // $(dl).append(dbtn);
+    //             var fbtn = $("<button>Favorite</button>").attr({"class": "fvrt"})
+    //             $(gifImgCont).append(gifImg, dbtn, fbtn);
+    //             $("#gifDiv").prepend(gifImgCont);
+    //             // $("#gifDiv").prepend(gifImg);
+    //         })
+    //     }
+    // },
+
     ajaxCall: function(url) {
-        for (var i = 1; i <= 10; i++) {
-            $.ajax(url, "Random").then(function(response) {
+            $.ajax(url, "Search").then(function(response) {
                 console.log(response);
-                var gifImgCont = $("<div>").attr({"class": "gifImgCont"});
-                var gifImg = $("<img>").attr({"class": "gifImg", "data-state": "still", "src": response.data.images.fixed_height_still.url, "data-still": response.data.images.fixed_height_still.url, "data-animate": response.data.images.fixed_height.url});
-                var dbtn = $("<button>Download</button>").attr({"class": "dnld"});
-                // var dl = $("<a>").attr({"href": response.data.url, "download": "image.gif"}); //download attribute not working, also not sure what link to use
-                // $(dl).click();
-                // $(dl).append(dbtn);
-                var fbtn = $("<button>Favorite</button>").attr({"class": "fvrt"})
-                $(gifImgCont).append(gifImg, dbtn, fbtn);
-                $("#gifDiv").prepend(gifImgCont);
-                // $("#gifDiv").prepend(gifImg);
-            })
-        }
+                for (var i = 0; i <= 9; i++) {
+                    var gifImgCont = $("<div>").attr({"class": "gifImgCont"});
+                    var gifRating = $("<p>").attr("id", "rating").text(response.data[i].rating.toUpperCase())
+                    var gifImg = $("<img>").attr({"class": "gifImg", "data-state": "still", "src": response.data[i].images.fixed_height_still.url, "data-still": response.data[i].images.fixed_height_still.url, "data-animate": response.data[i].images.fixed_height.url});
+                    var dbtn = $("<button>Download</button>").attr({"class": "dnld"});
+                    // var dl = $("<a>").attr({"href": response.data.url, "download": "image.gif"}); //download attribute not working, also not sure what link to use
+                    // $(dl).click();
+                    // $(dl).append(dbtn);
+                    var fbtn = $("<button>Favorite</button>").attr({"class": "fvrt"})
+                    $(gifImgCont).append(gifImg, gifRating, dbtn, fbtn);
+                    $("#gifDiv").prepend(gifImgCont);
+                    // $("#gifDiv").prepend(gifImg);
+            }
+        })
     },
 
     //-------------function 4---------------------
@@ -69,11 +95,13 @@ var gifSearch = {
 
     animate: function(state, specImg) {
         if (state === "still") {
-            $(specImg).attr({"data-state": "animate", "src": $(specImg).attr("data-animate")});
+            $(specImg).attr({"data-state": "animate", "src": $(specImg).attr("data-animate")})
+            $(specImg).parent().children("#rating").css("visibility", "hidden");
         }
 
         else if (state === "animate") {
-            $(specImg).attr({"data-state": "still", "src": $(specImg).attr("data-still")});
+            $(specImg).attr({"data-state": "still", "src": $(specImg).attr("data-still")})
+            $(specImg).parent().children("#rating").css("visibility", "visible");
         }
     },
 
@@ -110,7 +138,7 @@ var gifSearch = {
     //function that adds gif to hidden favorites section on button click, should store favorites to session or local storage
     favoriteGif: function(fvrtGifbtn, event) {
         event.preventDefault();
-        var toClone = $(fvrtGifbtn).parent().children(".gifImg");
+        var toClone = $(fvrtGifbtn).parent().remove(".dnld", ".fvrt");
         // var imgCanvas = document.createElement("canvas");
         // var imgContext = imgCanvas.getContext("2d");
         // imgCanvas.width = toClone.width;
@@ -121,7 +149,6 @@ var gifSearch = {
         var clone = $(toClone).clone();
         // localStorage.setItem("image", clone); //right here
         $("#favDiv").append(clone);
-        $(fvrtGifbtn).remove();
     },
 
     //function that downloads gif on button click

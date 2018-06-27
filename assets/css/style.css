@@ -132,6 +132,7 @@ body {
     position: relative;
     display: inline-block;
     text-align: center;
+    margin: 1%;
 }
 
 .dnld {
@@ -162,3 +163,15 @@ body {
     cursor: pointer;
 }
 
+#rating {
+    color: rgba(169, 169, 169, .5);
+    font-size: 6rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    font-weight: bolder;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
