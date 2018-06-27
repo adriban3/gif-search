@@ -149,6 +149,7 @@ var gifSearch = {
         var clone = $(toClone).clone();
         // localStorage.setItem("image", clone); //right here
         $("#favDiv").append(clone);
+        $(fvrtGifbtn).remove();
     },
 
     //function that downloads gif on button click
